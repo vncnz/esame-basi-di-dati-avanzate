@@ -1,0 +1,16 @@
+import "contrib/tomhollingworth/events"
+
+from(bucket:"veronacard")
+|> range(start: 2019-01-01T00:00:00Z, stop: 2019-12-31T23:59:59Z) //-3y)
+|> filter(fn:(r) => r._measurement == "swipes")
+|> keep(columns: ["_time", "_value", "poi"])
+
+|> limit(n:10000)
+|> group(columns: ["_value"])
+|> sort(columns: ["_time"])
+|> events.duration(
+  unit: 1m,
+  columnName: "duration",
+  timeColumn: "_time",
+  stopColumn: "_time"
+)

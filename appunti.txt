@@ -1,0 +1,58 @@
+https://portal.influxdata.com/downloads/
+https://docs.influxdata.com/influxdb/v1.8/introduction/get-started/
+
+DATABASE: InfluxDB
+DATASET: VeronaCard
+
+Si tratta delle strisciate delle VeronaCard dal 2014 al 2020 (un file CSV per ogni anno). La struttura di tutti i file è la seguente:
+
+Data ingresso
+Ora ingresso 
+POI
+Dispositivo: codice identificativo del dispositivo su cui è stata fatta la strisciata (potrebbero essercene più d'uno per lo stesso POI)
+Seriale VeronaCard
+Data Attivazione
+Profilo: tipo di VC (24-ore, 48-ore, ecc...)
+
+
+
+1) usare entrambi i sistemi di interrogazione?
+2) retention policy
+3) un solo bucket
+4) dire che esistono sia InfluxQL che Flux e che la 1.8 è la versione di passaggio
+4) dire che spesso NON dà errori ma zero risultati se si sbaglia query (ad esempio se si specificano solo tag e non almeno un field)
+
+
+
+
+Fare esempi con immagini/tabelle già basate sulla mia base dati?
+
+1) Introduzione al fatto che ho scelto InfluxDB/VeronaCARD
+2) Cos'è influxdb esposizione della questione versione (è uscita la 2.0 che usa Flux, le 1.x usavano InfluxQL, la 1.8 è la versione ponte che supporta entrambe)
+3) Non si basa su sistemi terzi ma implementa "personalmente" il tutto
+4) C'è una famiglia di prodotti che consentono oltre all'interrogazione la visualizzazione dei dati salvati in influxdb, io ho però usato python e la console.
+5) L'idea di base è permettere il salvataggio di serie temporali. Dalla guida al dimensionamento delle risorse è evidente che lo scopo principale è 
+        salvare grosse moli di dati molto velocemente, con risorse scarse si possono già salvare migliaia di nuovi dati al secondo. Per la lettura si possono eseguire query dirette o continuous queries
+    - query "dirette": le lanci, ti danno risultati
+    - continuous queries: le registri, vengono eseguite automaticamente e salvano i risultati nelle collezioni che indichi, collezioni che puoi interrogare con un 
+            carico di lavoro minore in quanto dati già aggregati
+6) I dati sono divisi in buckets. Ogni dato è costituito da:
+    - una serie di fields con i rispettivi valori: non indicizzati, contengono i dati "veri"
+    - una serie di tags con i rispettivi valori: indicizzati, attenzione alla cardinalità, contengono delle "categorie" per i dati
+7) Retention period: cos'è, come funziona
+8) Timestamp: memorizzato come numero, granularità a scelta (s, ms, ns) definibile per singoli data points
+9) Measurment: è la "tabella" dei database relazionali
+10) Fields: sono i dati veri e propri, posso salvarne diversi
+11) Tags: servono per classificare i dati in categorie, sono sempre stringhe
+12) Fields vs tags
+13) Serie
+14) Due diversi sistemi di interrogazione: InfluxQL e Flux
+15) Due parole su Flux
+16) InfluxQL fatto bene
+17) Difetto: alcuni errori di stesura di una query portano a zero risultati anziché errore esplicito
+18) Non ci sono join ma union (non è più vero!)
+
+
+----------------------------------------------------------------------
+
+Ricordare che ci sono ora le join ma solo inner, quindi il giorno bisestile si attacca al tram... Il che ci può anche stare per il mio caso d'uso
