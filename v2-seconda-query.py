@@ -7,8 +7,8 @@ bucket = 'veronacard_test'
 client = InfluxDBClient(
     url="http://localhost:8086",
     # token='XW-1vwymovFSHkMPAa7lO0z7jN5EMylDJIo13Jtk8JPpO_hq832bY8SVmVzxTIoxxzs8y5v9xwYJbJf9SPZI6Q=='
-    # token='fUqlD-BmuQf4xczeIAWEIZDkYh2C16vZWLG1W8SxjqIl8WZyZUQlp5d--t0iL0SWExq4G53q4hlzzcCUppGOIw==' # windows
-    token='Hki0rGb_R5pbCEkquPmetbu2tgQHFrJ-iYHsJUwep-7UNQ8b_zanqkOjhucWCGCRFRLWnDEsC_aiS8MNQi0Qow==' # win_uff
+    token='fUqlD-BmuQf4xczeIAWEIZDkYh2C16vZWLG1W8SxjqIl8WZyZUQlp5d--t0iL0SWExq4G53q4hlzzcCUppGOIw==' # windows
+    # token='Hki0rGb_R5pbCEkquPmetbu2tgQHFrJ-iYHsJUwep-7UNQ8b_zanqkOjhucWCGCRFRLWnDEsC_aiS8MNQi0Qow==' # win_uff
 )
 client.api_client.configuration.timeout = 30000
 
