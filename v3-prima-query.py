@@ -130,11 +130,10 @@ from(bucket:"veronacard")
     every: 1d,
     fn: count,
     column: "_value",
-    timeSrc: "_start",
     timeDst: "_time",
     createEmpty: true
 )
-|> group(columns:["poi"])
+// |> group(columns:["poi"])
 |> map(fn: (r) => ({r with
     dayofyear: strings.substring(v: string(v:r._time), start: 5, end: 10),
     year: strings.substring(v: string(v:r._time), start: 0, end: 4)
